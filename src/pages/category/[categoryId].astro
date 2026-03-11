@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Category from '../../react_pages/Category';
+import { categories } from '../../data/mockData';
+
+export function getStaticPaths() {
+  return categories.map(category => ({
+    params: { categoryId: category.id },
+  }));
+}
+
+const { categoryId } = Astro.params;
+const category = categories.find(c => c.id === categoryId);
+---
+
+<Layout title={category?.name || "Categoría"}>
+	<Category client:load categoryId={categoryId} />
+</Layout>
