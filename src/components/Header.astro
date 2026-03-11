@@ -1,36 +1,50 @@
 ---
 ---
-<header class="sticky top-0 z-50 bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center">
-        <button class="p-2 -ml-2 mr-2 md:hidden mobile-menu-btn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+<header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10 px-6 lg:px-20 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-8">
+    <!-- Logo & AI Search -->
+    <div class="flex items-center gap-12">
+      <a href="/" class="flex items-center gap-2 text-slate-900 dark:text-slate-100">
+        <span class="material-symbols-outlined text-primary text-3xl">grid_view</span>
+        <h1 class="font-display text-2xl font-bold tracking-tight">Decomaket</h1>
+      </a>
+      <div class="hidden md:flex items-center bg-white dark:bg-slate-800 border border-primary/20 rounded-lg px-3 py-1.5 w-80">
+        <span class="material-symbols-outlined text-slate-400">search</span>
+        <input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400" placeholder="Buscar muebles..." type="text"/>
+        <button class="flex items-center gap-1 bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded transition-colors" title="AI Visual Search">
+          <span class="material-symbols-outlined text-lg">linked_camera</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider">AI</span>
         </button>
-        <a href="/" class="text-xl font-bold tracking-tighter">LUMA</a>
-      </div>
-      
-      <nav class="hidden md:flex space-x-8">
-        <a href="/category/asientos-premium" class="text-sm font-medium text-gray-900 hover:text-gray-600">Muebles</a>
-        <a href="/category/iluminacion" class="text-sm font-medium text-gray-500 hover:text-gray-900">Iluminación</a>
-        <a href="/category/decoracion" class="text-sm font-medium text-gray-500 hover:text-gray-900">Decoración</a>
-        <a href="/collections" class="text-sm font-medium text-gray-500 hover:text-gray-900">Colecciones</a>
-      </nav>
-
-      <div class="flex items-center space-x-4">
-        <a href="/checkout" class="p-2 text-gray-400 hover:text-gray-500 relative">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          <span class="cart-badge absolute top-1 right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-black rounded-full" style="display: none;">0</span>
-        </a>
       </div>
     </div>
+    <!-- Main Categories -->
+    <nav class="hidden lg:flex items-center gap-8 font-medium text-sm">
+      <a class="hover:text-primary transition-colors" href="/category/asientos-premium">Sofás</a>
+      <a class="hover:text-primary transition-colors" href="/category/iluminacion">Lighting</a>
+      <a class="hover:text-primary transition-colors" href="/category/decoracion">Sala</a>
+      <a class="hover:text-primary transition-colors" href="/collections">Colecciones</a>
+    </nav>
+    <!-- User Actions -->
+    <div class="flex items-center gap-4">
+      <button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+        <span class="material-symbols-outlined">person</span>
+      </button>
+      <a href="/checkout" class="p-2 hover:bg-primary/10 rounded-full transition-colors relative">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span class="cart-badge absolute top-1 right-1 bg-primary text-[10px] font-bold px-1.5 rounded-full" style="display: none;">0</span>
+      </a>
+      <button class="lg:hidden p-2 mobile-menu-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
   </div>
-  <div class="mobile-menu hidden md:hidden border-t border-gray-100 bg-white">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="/category/asientos-premium" class="block px-3 py-2 rounded-md font-medium text-gray-900">Muebles</a>
-        <a href="/category/iluminacion" class="block px-3 py-2 rounded-md font-medium text-gray-500">Iluminación</a>
-        <a href="/category/decoracion" class="block px-3 py-2 rounded-md font-medium text-gray-500">Decoración</a>
-        <a href="/collections" class="block px-3 py-2 rounded-md font-medium text-gray-500">Colecciones</a>
-      </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu hidden lg:hidden mt-4 border-t border-primary/10 pt-4">
+    <nav class="flex flex-col gap-4 font-medium text-sm">
+      <a class="hover:text-primary transition-colors" href="/category/asientos-premium">Sofás</a>
+      <a class="hover:text-primary transition-colors" href="/category/iluminacion">Lighting</a>
+      <a class="hover:text-primary transition-colors" href="/category/decoracion">Sala</a>
+      <a class="hover:text-primary transition-colors" href="/collections">Colecciones</a>
+    </nav>
   </div>
 </header>

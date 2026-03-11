@@ -6,44 +6,151 @@ const featured = products.slice(0, 4);
 ---
 
 <Layout title="Home">
-    <!-- Hero Section -->
-    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-black/20"></div>
+    <!-- Interactive Hero Section with Hotspots -->
+    <section class="relative w-full h-[85vh] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdM7_z5cwqYEUKvxBdz7nCu7HLojNtRwzolHCHSMMihdbOWThIQetlIu4RkVNV4k69b3Lp6FcOJ_ItK0dGt1aWjF3-gKCkn1yON1TPRM5vSWIxkyp8RmY86tTfDitaYLtA0iOR4orY3c-bBtpM_pNF4eCXvft-KSVf-yCZBg0RhVyox1m24Jw-KT83nY3yUQo8BnWminlqFp4ES1B4PbMe6Azf0PgYGRfUdFxGQjvbFw0LOGUSqXiLAwI9GcgWI_Fkc48mJ5_QtDA')">
+            <div class="absolute inset-0 bg-black/20"></div>
         </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold tracking-wider uppercase mb-6">Nueva Colección Otoño</span>
-          <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6">Eleva tu Santuario</h1>
-          <p class="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto font-light">Descubre piezas diseñadas para transformar tu espacio en un refugio de calma y estilo.</p>
-          <a href="/category/asientos-premium" class="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors">Explorar Colección</a>
+        <!-- Hero Content -->
+        <div class="relative h-full flex flex-col items-center justify-center text-center px-4">
+            <h2 class="font-display text-white text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Eleva tu <span class="italic font-normal text-white">Santuario</span></h2>
+            <p class="text-white text-lg md:text-xl max-w-2xl mb-8 font-light drop-shadow-md">Descubre nuestra nueva Colección Curada de Otoño. Piezas atemporales diseñadas para el conocedor moderno.</p>
+            <a href="/category/asientos-premium" class="bg-primary text-slate-900 px-10 py-4 rounded font-bold text-lg hover:bg-white transition-all shadow-xl">Comprar el Look</a>
+        </div>
+        <!-- Interactive Hotspots -->
+        <!-- Hotspot 1: Lamp -->
+        <div class="absolute top-[40%] right-[25%] group cursor-pointer hidden md:block">
+            <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 bg-primary/40 rounded-full animate-ping"></div>
+                <div class="relative w-4 h-4 bg-primary rounded-full border-2 border-white"></div>
+            </div>
+            <!-- Tooltip Overlay -->
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white dark:bg-slate-900 p-3 rounded-lg shadow-2xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover:translate-y-0">
+                <div class="w-full h-24 mb-2 overflow-hidden rounded">
+                    <img class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPsQpSbb-W9dpFJ_Dd7NFv83tv4paGfasrytcwypL9tUEyAJJLMT4_xxXNklc4xE6z-vHurMP6cocBVRIowUWF2C5iXPR43fFDbr8JUq-UuZdkcnfwhUwY8ggHQ_FoJMSUpgAG98z_cfdSAztb2lMCnB_kZnow5z5ifqqSwpOl8k0L08iT2DVQThSSAzpoaE7V6eH2sltjCPna_SRpiJNT9WPY12H4eqnPNRVlZ6kkOWnsLouHx2rEPFxfYLUCsUgWBlZvJiN6lCg"/>
+                </div>
+                <h4 class="font-bold text-xs uppercase tracking-tighter text-slate-900 dark:text-white">Aurelius Floor Lamp</h4>
+                <div class="flex items-center gap-1 text-[10px] text-green-600 font-bold uppercase mt-1">
+                    <span class="material-symbols-outlined text-xs">check_circle</span> In Stock
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Featured Products -->
-    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-              <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">Piezas Destacadas</h2>
-              <p class="text-gray-500">Selección curada de nuestros favoritos.</p>
+    <section class="py-24 max-w-7xl mx-auto px-6 overflow-hidden">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="max-w-lg">
+                <span class="text-primary font-bold uppercase tracking-[0.2em] text-xs">Selección Curada</span>
+                <h3 class="font-display text-4xl md:text-5xl font-bold mt-2">Piezas Destacadas</h3>
+                <p class="text-slate-500 mt-4 leading-relaxed">Nuestros favoritos de la temporada, elegidos por su diseño y calidad excepcional.</p>
             </div>
-            <a href="/category/asientos-premium" class="hidden sm:flex items-center text-sm font-medium">Ver todo</a>
+            <a class="flex items-center gap-2 font-bold text-sm uppercase tracking-wider border-b-2 border-primary pb-1 hover:text-primary transition-colors" href="/category/asientos-premium">VER TODO <span class="material-symbols-outlined">arrow_forward</span></a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featured.map(p => (
                 <a href={`/product/${p.id}`} class="group">
-                    <div class="relative aspect-[4/5] overflow-hidden bg-gray-100 rounded-2xl mb-4">
-                        <img src={p.image} alt={p.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        {p.isNew && <span class="absolute top-4 left-4 px-2.5 py-1 bg-white text-xs font-bold uppercase rounded-md">Nuevo</span>}
-                        {p.isBestseller && !p.isNew && <span class="absolute top-4 left-4 px-2.5 py-1 bg-black text-white text-xs font-bold uppercase rounded-md">Más vendido</span>}
+                    <div class="relative aspect-[4/5] overflow-hidden bg-white dark:bg-slate-800 rounded-xl mb-4 shadow-sm border border-slate-100 dark:border-slate-800">
+                        <img src={p.image} alt={p.name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        {p.isNew && <span class="absolute top-4 left-4 px-2.5 py-1 bg-primary text-slate-900 text-[10px] font-bold uppercase rounded">Nuevo</span>}
+                        {p.isBestseller && !p.isNew && <span class="absolute top-4 left-4 px-2.5 py-1 bg-slate-900 text-white text-[10px] font-bold uppercase rounded">Más vendido</span>}
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
                     </div>
-                    <h3 class="text-sm font-medium text-gray-900 mb-1">{p.name}</h3>
-                    <div class="flex justify-between">
-                        <p class="text-sm text-gray-500">${p.price}</p>
-                        {p.originalPrice && <p class="text-sm text-gray-400 line-through">${p.originalPrice}</p>}
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{p.name}</h3>
+                    <div class="flex items-center gap-3">
+                        <p class="text-sm font-bold text-primary">${p.price}</p>
+                        {p.originalPrice && <p class="text-xs text-slate-400 line-through">${p.originalPrice}</p>}
                     </div>
                 </a>
             ))}
+        </div>
+    </section>
+
+    <!-- Room Inspiration Section -->
+    <section class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-100 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="max-w-lg">
+                <span class="text-primary font-bold uppercase tracking-[0.2em] text-xs">Espacios Curados</span>
+                <h3 class="font-display text-4xl md:text-5xl font-bold mt-2">Espacios que Inspiran</h3>
+                <p class="text-slate-500 mt-4 leading-relaxed">Donde la arquitectura se encuentra con la estética. Explora nuestras habitaciones curadas por expertos.</p>
+            </div>
+            <a class="flex items-center gap-2 font-bold text-sm uppercase tracking-wider border-b-2 border-primary pb-1 hover:text-primary transition-colors" href="/collections">EXPLORAR CUIDADOS <span class="material-symbols-outlined">arrow_forward</span></a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[600px]">
+            <div class="md:col-span-8 group relative overflow-hidden rounded-xl">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfvF_T0XQelkWz0QHYbbVIoHu7Vg2ldlwB-rbo5kVr4tguj2iXLENFcOYFJ7AAghudJGczkFzRFnnXjJIT4zEvtarHuItRK6lg3vJoBznS0fyWjdLDDs5UYYTMqLruez3mgxVlJrhubBrpq7YT_FpfrTVIGmFjQi84snDNeEMbuVgDnJ2yC7r3LLVP4xGCegq2CxqENr0e_G_1AjPAnNGcjjUie_kXIQLn696RYjaQLu6o2D__Eji42XntWkmavrmUDknCRrkxZtk')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute bottom-8 left-8">
+                    <h4 class="text-white font-display text-3xl font-bold">La Recámara Serena</h4>
+                    <p class="text-white/80 text-sm mt-2">Texturas naturales y paletas suaves para un descanso reparador.</p>
+                </div>
+            </div>
+            <div class="md:col-span-4 grid grid-rows-2 gap-4">
+                <div class="relative overflow-hidden rounded-xl group">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuARX3WZZef4aH0xkWjVSIMi0hWrio54JBI0uW6cvcYFff_PqtjKP6quQXxKZZ9gUdS9zpY2MVxvF4HUmzSbBBZHFANhhVW9QyJVjXivNUx_EV0A2xRR_AirjLh-TetTGguxNXmTwRbvO4inlEBDJGAhk_-xY89ffBdg_JI8bmO1oJ4QEzZ7CCzL0wMvFBz7PP13FiY-4cKwIQ8SFpmgxNaGv68GHdxa-FnqB-wi9e9ZQVswvKiYW6ztoYg89pMoJMmmDH6dsq0VipE')"></div>
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="bg-white text-slate-900 px-4 py-2 font-bold text-xs uppercase tracking-widest rounded">Comprar Comedor</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-xl group">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1hLpvB1vzpPwni3KafX13apUB3PsPckkb2NWe3_tMH9LLN3TLXW6JbaxeAfAVfcT7zMUonc7_hAxsg3Bb7KPnkzlQUUrMIHz2aoSoYVsPDYPvzxmlL8Sit-Ph1t1Y4-JORS5rddAEkIlDgIaJO0xdQYf6btAAx-XccOfLrzCZDfUQA-fF_T0OMtwPOalB7p6PP6CIrnjsc5kAyBXNu824frYZAZ_yiWw5qs8C2z6GOB3h0yiQNObpSojcE9mLz4Xc3bO5JcFQCyE')"></div>
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="bg-white text-slate-900 px-4 py-2 font-bold text-xs uppercase tracking-widest rounded">Comprar Oficina</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Search Highlight -->
+    <section class="bg-primary/5 dark:bg-primary/5 py-24 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 relative">
+                <div class="aspect-square bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                    <div class="border-2 border-dashed border-primary/40 rounded-xl h-full flex flex-col items-center justify-center text-center p-8">
+                        <span class="material-symbols-outlined text-primary text-6xl mb-4 animate-bounce">linked_camera</span>
+                        <h5 class="text-xl font-bold mb-2">Descubrimiento Visual con IA</h5>
+                        <p class="text-slate-500 text-sm">Sube una foto de cualquier espacio o artículo, y nuestra IA encontrará el complemento perfecto de nuestra colección de lujo.</p>
+                        <button class="mt-8 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-8 py-3 rounded-full font-bold transition-transform hover:scale-105">Probar Búsqueda Visual</button>
+                    </div>
+                </div>
+                <!-- Decor accents -->
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <h3 class="font-display text-4xl font-bold mb-6">¿No encuentras las palabras?<br/>Usa una foto.</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-4">
+                        <div class="flex-none w-10 h-10 rounded-full bg-primary flex items-center justify-center text-slate-900">
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                        </div>
+                        <div>
+                            <h6 class="font-bold">Toma o Sube una Foto</h6>
+                            <p class="text-slate-500 text-sm font-medium">Toma una foto de una pieza que te guste en una revista o en casa de un amigo.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="flex-none w-10 h-10 rounded-full bg-primary flex items-center justify-center text-slate-900">
+                            <span class="material-symbols-outlined">analytics</span>
+                        </div>
+                        <div>
+                            <h6 class="font-bold">Análisis Instantáneo</h6>
+                            <p class="text-slate-500 text-sm font-medium">Nuestra IA analiza la forma, el material y el estilo en milisegundos.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="flex-none w-10 h-10 rounded-full bg-primary flex items-center justify-center text-slate-900">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <div>
+                            <h6 class="font-bold">Compra Similares</h6>
+                            <p class="text-slate-500 text-sm font-medium">Explora alternativas curadas que coincidan con tu gusto único.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 </Layout>

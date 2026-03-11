@@ -15,23 +15,74 @@ const filtered = products.filter(p => p.category === id);
 ---
 
 <Layout title={category.name}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <h1 class="text-4xl font-bold mb-12">{category.name}</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map(p => (
-                <a href={`/product/${p.id}`} class="group">
-                    <div class="relative aspect-[4/5] overflow-hidden bg-gray-100 rounded-2xl mb-4">
-                        <img src={p.image} alt={p.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-sm font-medium text-gray-900 mb-1">{p.name}</h3>
-                            <p class="text-sm text-gray-500">{p.materials[0]}</p>
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 w-full">
+        <!-- Filters Sidebar -->
+        <aside class="w-full lg:w-64 flex-shrink-0 space-y-8">
+            <div>
+                <h3 class="text-lg font-bold font-display mb-4 border-b border-primary/20 pb-2">Filtros</h3>
+                <div class="space-y-6">
+                    <!-- Category -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Categoría</span>
+                            <span class="material-symbols-outlined text-sm cursor-help text-primary" title="Browse by furniture type">info</span>
                         </div>
-                        <p class="text-sm font-medium text-gray-900">${p.price}</p>
+                        <div class="space-y-2">
+                            {categories.map(cat => (
+                                <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors">
+                                    <input type="checkbox" checked={cat.id === id} class="rounded-sm border-primary/50 text-primary focus:ring-primary" onclick={`window.location.href='/category/${cat.id}'`} />
+                                    {cat.name}
+                                </label>
+                            ))}
+                        </div>
                     </div>
-                </a>
-            ))}
+                </div>
+                <button class="mt-8 w-full bg-primary py-3 text-sm font-bold uppercase tracking-widest text-slate-900 hover:bg-primary/90 transition-all rounded">Aplicar Filtros</button>
+            </div>
+        </aside>
+
+        <!-- Product Grid -->
+        <div class="flex-1">
+            <!-- Breadcrumbs & Header -->
+            <div class="mb-8">
+                <nav class="flex text-xs uppercase tracking-widest text-slate-400 mb-2 gap-2">
+                    <a class="hover:text-primary transition-colors" href="/">Inicio</a>
+                    <span>/</span>
+                    <span class="text-slate-900 dark:text-slate-100 font-bold">{category.name}</span>
+                </nav>
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h1 class="text-4xl font-black font-display tracking-tight">{category.name}</h1>
+                        <p class="text-slate-500 mt-2 max-w-xl">Una selección curada de piezas diseñadas arquitectónicamente para tu hogar.</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="flex items-center gap-2 rounded-lg bg-primary/10 px-4 py-2 text-sm font-medium hover:bg-primary/20 transition-colors">
+                            Ordenar: Destacados <span class="material-symbols-outlined text-lg">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+                {filtered.map(p => (
+                    <a href={`/product/${p.id}`} class="group">
+                        <div class="relative aspect-[4/5] overflow-hidden bg-slate-100 dark:bg-slate-800 rounded-xl mb-4 shadow-sm border border-slate-100 dark:border-slate-800">
+                            <img src={p.image} alt={p.name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                            {p.isNew && <span class="absolute top-4 left-4 px-2.5 py-1 bg-primary text-slate-900 text-[10px] font-bold uppercase rounded">Nuevo</span>}
+                            <div class="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 flex gap-2">
+                                <button class="flex-1 bg-white/90 backdrop-blur py-2 text-xs font-bold uppercase tracking-wider text-slate-900 rounded-lg shadow-xl">Vista Rápida</button>
+                                <button class="bg-primary p-2 text-slate-900 rounded-lg shadow-xl"><span class="material-symbols-outlined">add_shopping_cart</span></button>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{p.name}</h3>
+                        <div class="flex items-center gap-3">
+                            <p class="text-sm font-bold text-primary">${p.price}</p>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-medium italic">{p.materials[0]}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
         </div>
-    </div>
+    </main>
 </Layout>

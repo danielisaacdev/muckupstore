@@ -13,35 +13,152 @@ const { product } = Astro.props;
 ---
 
 <Layout title={product.name}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 py-12">
-            <div class="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden">
-                <img src={product.image} class="w-full h-full object-cover">
+    <main class="mx-auto max-w-[1280px] w-full px-4 md:px-10 py-8">
+        <!-- Hero Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Left: Image Gallery & Tools -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                <div class="relative group">
+                    <div class="aspect-[4/3] w-full bg-primary/5 rounded-xl overflow-hidden shadow-sm">
+                        <img src={product.image} alt={product.name} class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                        <button class="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-full text-[10px] font-bold shadow-lg border border-primary/20 text-slate-900 dark:text-white uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm">360</span> VISTA 360°
+                        </button>
+                        <button class="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-full text-[10px] font-bold shadow-lg border border-primary/20 text-slate-900 dark:text-white uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm">view_in_ar</span> VER EN MI ESPACIO
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="aspect-square rounded-lg bg-primary/5 border-2 border-primary overflow-hidden cursor-pointer">
+                         <img src={product.image} alt={product.name} class="w-full h-full object-cover">
+                    </div>
+                    {product.materials.map(m => (
+                        <div class="aspect-square rounded-lg bg-primary/5 border border-primary/20 overflow-hidden flex flex-col items-center justify-center p-2 text-center">
+                            <span class="material-symbols-outlined text-primary mb-1">inventory_2</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-500">{m}</span>
+                        </div>
+                    ))}
+                    <div class="aspect-square rounded-lg bg-primary/5 border border-primary/20 overflow-hidden flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">play_circle</span>
+                    </div>
+                </div>
             </div>
-            <div class="mt-10 lg:mt-0 lg:px-8">
-                <h1 class="text-3xl font-bold mb-4">{product.name}</h1>
-                <p class="text-2xl mb-6">${product.price}</p>
-                <p class="text-gray-600 mb-8">{product.description}</p>
-                
-                <div class="space-y-6">
+
+            <!-- Right: Product Info & Configurator -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                <div>
+                    <span class="text-primary font-bold tracking-widest text-xs uppercase">{product.category}</span>
+                    <h1 class="text-4xl md:text-5xl font-display font-bold text-slate-900 dark:text-slate-100 mt-2">{product.name}</h1>
+                    <div class="flex items-center gap-4 mt-4">
+                        <div class="flex text-primary">
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined">star_half</span>
+                        </div>
+                        <span class="text-xs text-slate-500 underline decoration-primary/40 cursor-pointer">Reseñas Verificadas</span>
+                    </div>
+                    <p class="text-3xl font-display text-slate-900 dark:text-slate-100 mt-6">${product.price}</p>
+                </div>
+
+                <!-- Configurator -->
+                <div class="flex flex-col gap-6 p-6 rounded-xl border border-primary/20 bg-primary/5">
                     <div>
-                        <h3 class="text-sm font-medium mb-4">Color</h3>
-                        <div class="flex gap-3">
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">SELECCIONA EL COLOR</p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
                             {product.colors.map(c => (
-                                <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-black" style={`background-color: ${c}`} onclick={`window.selectedColor='${c}'`}></button>
+                                <button 
+                                    class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-800 ring-2 ring-offset-2 ring-transparent focus:ring-primary transition-all color-selector" 
+                                    style={`background-color: ${c}`} 
+                                    data-color={c}
+                                    title={c}
+                                ></button>
                             ))}
                         </div>
                     </div>
-                    <button id="add-to-cart-btn" class="w-full bg-black text-white py-4 rounded-lg font-medium hover:bg-gray-900">Añadir al carrito</button>
+                    <div class="pt-4 border-t border-primary/10">
+                        <button id="add-to-cart-btn" class="w-full bg-primary text-slate-900 font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:brightness-105 transition-all shadow-lg active:scale-95">
+                            <span class="material-symbols-outlined">shopping_cart</span> AGREGAR AL CARRITO — ${product.price}
+                        </button>
+                        <p class="text-center text-[10px] text-slate-500 mt-3 flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-sm">local_shipping</span> Entrega premium en 4 a 6 semanas
+                        </p>
+                    </div>
                 </div>
+
+                <a class="flex items-center justify-between p-4 border border-dashed border-primary/40 rounded-lg hover:bg-primary/5 transition-colors group" href="#">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">straighten</span>
+                        <div>
+                            <p class="text-sm font-bold">Guía de Medidas para el Hogar</p>
+                            <p class="text-xs text-slate-500">Mide tus puertas y pasillos</p>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+                
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">{product.description}</p>
             </div>
         </div>
-    </div>
+
+        <!-- Specifications Section -->
+        <section class="mt-24 border-t border-primary/10 pt-16">
+            <h2 class="text-3xl font-display font-bold mb-12 text-center text-slate-900 dark:text-slate-100 italic">Especificaciones Técnicas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div class="space-y-8">
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-10">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Materiales</p>
+                            <p class="text-lg font-medium">{product.materials.join(', ')}</p>
+                            <p class="text-sm text-slate-500 mt-1">Sostenibilidad y calidad garantizada.</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Tapicería</p>
+                            <p class="text-lg font-medium">Calidad Premium</p>
+                            <p class="text-sm text-slate-500 mt-1">Resistente a manchas y duradero.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-primary/5 rounded-xl border border-primary/10">
+                        <h4 class="font-bold text-sm mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-lg">verified</span> Garantía de por Vida
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Nuestro compromiso es con tu satisfacción. Estructura interna garantizada por vida.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="aspect-[16/10] bg-white dark:bg-slate-800 rounded-xl p-8 border border-primary/20 flex items-center justify-center">
+                        <svg class="w-full h-full text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 400 250">
+                            <path d="M50,200 L350,200 M50,150 L50,200 M350,150 L350,200 M100,50 L300,50 L350,150 L50,150 L100,50 Z" stroke-width="2"></path>
+                            <path d="M50,150 L350,150" stroke-dasharray="4 4" stroke-width="1"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs text-center text-slate-500 uppercase tracking-widest font-bold">Diseño Arquitectónico — Dimensiones Técnicas</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script define:vars={{ product }}>
+        let selectedColor = product.colors[0];
+        
+        const selectors = document.querySelectorAll('.color-selector');
+        selectors.forEach(s => {
+            s.addEventListener('click', () => {
+                selectedColor = s.getAttribute('data-color');
+                selectors.forEach(sel => sel.classList.remove('ring-primary'));
+                s.classList.add('ring-primary');
+            });
+        });
+
         document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
             if (window.addToCart) {
-                window.addToCart(product, 1, window.selectedColor || product.colors[0], product.materials[0]);
+                window.addToCart(product, 1, selectedColor, product.materials[0]);
             }
         });
     </script>
