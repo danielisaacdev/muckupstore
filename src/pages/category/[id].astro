@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products, categories } from '../../data/products';
+
+export function getStaticPaths() {
+  return categories.map(cat => ({
+    params: { id: cat.id },
+    props: { category: cat }
+  }));
+}
+
+const { id } = Astro.params;
+const { category } = Astro.props;
+const filtered = products.filter(p => p.category === id);
+---
+
+<Layout title={category.name}>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+        <h1 class="text-4xl font-bold mb-12">{category.name}</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map(p => (
+                <a href={`/product/${p.id}`} class="group">
+                    <div class="relative aspect-[4/5] overflow-hidden bg-gray-100 rounded-2xl mb-4">
+                        <img src={p.image} alt={p.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-900 mb-1">{p.name}</h3>
+                            <p class="text-sm text-gray-500">{p.materials[0]}</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">${p.price}</p>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map(p => ({
+    params: { id: p.id },
+    props: { product: p }
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout title={product.name}>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 py-12">
+            <div class="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden">
+                <img src={product.image} class="w-full h-full object-cover">
+            </div>
+            <div class="mt-10 lg:mt-0 lg:px-8">
+                <h1 class="text-3xl font-bold mb-4">{product.name}</h1>
+                <p class="text-2xl mb-6">${product.price}</p>
+                <p class="text-gray-600 mb-8">{product.description}</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-sm font-medium mb-4">Color</h3>
+                        <div class="flex gap-3">
+                            {product.colors.map(c => (
+                                <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-black" style={`background-color: ${c}`} onclick={`window.selectedColor='${c}'`}></button>
+                            ))}
+                        </div>
+                    </div>
+                    <button id="add-to-cart-btn" class="w-full bg-black text-white py-4 rounded-lg font-medium hover:bg-gray-900">Añadir al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script define:vars={{ product }}>
+        document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
+            if (window.addToCart) {
+                window.addToCart(product, 1, window.selectedColor || product.colors[0], product.materials[0]);
+            }
+        });
+    </script>
+</Layout>

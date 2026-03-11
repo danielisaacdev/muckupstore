@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Pago Seguro">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Items -->
+            <div class="flex-1 bg-white p-8 rounded-2xl shadow-sm border" id="checkout-items">
+                <div class="text-center py-12">Cargando carrito...</div>
+            </div>
+            
+            <!-- Summary -->
+            <div class="lg:w-96" id="checkout-summary">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border sticky top-24">
+                    <h2 class="text-lg font-bold mb-6">Resumen del pedido</h2>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between text-gray-500"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+                        <div class="flex justify-between text-gray-500"><span>Impuestos (21%)</span><span id="tax">$0.00</span></div>
+                        <div class="border-t pt-4 flex justify-between text-base font-bold"><span>Total</span><span id="total">$0.00</span></div>
+                    </div>
+                    <button class="w-full mt-6 bg-black text-white py-4 rounded-lg font-medium hover:bg-gray-900" id="complete-btn">Completar pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function renderCheckout() {
+            const list = document.getElementById('checkout-items');
+            if (!list) return;
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<div class="text-center py-12"><h2 class="text-2xl font-bold">Tu carrito está vacío</h2><a href="/" class="mt-4 inline-block text-black underline">Seguir comprando</a></div>';
+                const summary = document.getElementById('checkout-summary');
+                if (summary) summary.style.display = 'none';
+                return;
+            }
+
+            list.innerHTML = cart.map((item, i) => `
+                <div class="flex gap-4 py-4 border-b">
+                    <img src="${item.product.image}" class="w-20 h-20 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h3 class="font-medium">${item.product.name}</h3>
+                        <p class="text-sm text-gray-500">${item.color || ''}</p>
+                        <div class="flex items-center mt-2">
+                            <button class="quantity-btn p-1 border rounded" data-index="${i}" data-val="-1">-</button>
+                            <span class="px-4">${item.quantity}</span>
+                            <button class="quantity-btn p-1 border rounded" data-index="${i}" data-val="1">+</button>
+                            <button class="remove-btn ml-auto text-xs text-red-500" data-index="${i}">Eliminar</button>
+                        </div>
+                    </div>
+                    <p class="font-medium">$${(item.product.price * item.quantity).toFixed(2)}</p>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+            const tax = subtotal * 0.21;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+            // Event listeners
+            document.querySelectorAll('.quantity-btn').forEach(btn => btn.addEventListener('click', e => {
+                const idx = parseInt(e.target.dataset.index);
+                const val = parseInt(e.target.dataset.val);
+                const currentCart = JSON.parse(localStorage.getItem('cart'));
+                currentCart[idx].quantity = Math.max(1, currentCart[idx].quantity + val);
+                localStorage.setItem('cart', JSON.stringify(currentCart));
+                renderCheckout();
+                window.dispatchEvent(new CustomEvent('cart-updated'));
+            }));
+
+            document.querySelectorAll('.remove-btn').forEach(btn => btn.addEventListener('click', e => {
+                const idx = parseInt(e.target.dataset.index);
+                const currentCart = JSON.parse(localStorage.getItem('cart'));
+                currentCart.splice(idx, 1);
+                localStorage.setItem('cart', JSON.stringify(currentCart));
+                renderCheckout();
+                window.dispatchEvent(new CustomEvent('cart-updated'));
+            }));
+        }
+
+        document.getElementById('complete-btn')?.addEventListener('click', () => {
+            alert('Pedido completado');
+            localStorage.setItem('cart', '[]');
+            window.location.href = '/';
+        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', renderCheckout);
+        window.addEventListener('cart-updated', renderCheckout);
+    </script>
+</Layout>
