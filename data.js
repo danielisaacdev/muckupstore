@@ -1,24 +1,4 @@
-export interface Product {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  images: string[];
-  rating: number;
-  reviews: number;
-  description: string;
-  colors: string[];
-  materials: string[];
-  dimensions: string;
-  weight: string;
-  tags: string[];
-  isNew?: boolean;
-  isBestseller?: boolean;
-}
-
-export const products: Product[] = [
+const products = [
   {
     id: 'el-gran-sofa',
     name: 'El Gran Sofá',
@@ -258,10 +238,34 @@ export const products: Product[] = [
   }
 ];
 
-export const categories = [
+const categories = [
   { id: 'asientos-premium', name: 'Asientos Premium' },
   { id: 'mesas-escritorios', name: 'Mesas y Escritorios' },
   { id: 'almacenamiento', name: 'Almacenamiento' },
   { id: 'iluminacion', name: 'Iluminación' },
   { id: 'decoracion', name: 'Decoración' }
+];
+
+const collectionsData = [
+  {
+    id: 'esencia-nordica',
+    title: 'Esencia Nórdica',
+    description: 'Líneas puras, maderas claras y una paleta de colores serena. Esta colección trae la luz y la calma de los paisajes escandinavos directamente a tu hogar, priorizando la funcionalidad sin perder la calidez.',
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1200',
+    link: 'category.html?id=asientos-premium'
+  },
+  {
+    id: 'brutalismo-moderno',
+    title: 'Brutalismo Moderno',
+    description: 'Materiales crudos, formas geométricas audaces y una presencia imponente. Para espacios que buscan hacer una declaración de intenciones fuerte y sofisticada, combinando metales oscuros con cueros premium.',
+    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200',
+    link: 'category.html?id=asientos-premium'
+  },
+  {
+    id: 'refugio-natural',
+    title: 'Refugio Natural',
+    description: 'Texturas orgánicas, tonos tierra y formas fluidas que invitan al descanso. Una colección diseñada para reconectar con la naturaleza desde el interior, utilizando linos lavados y maderas sin tratar.',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=1200',
+    link: 'category.html?id=asientos-premium'
+  }
 ];

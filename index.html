@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIP Design | Muebles y Diseño Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/20"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold tracking-wider uppercase mb-6">Nueva Colección Otoño</span>
+          <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6">Eleva tu Santuario</h1>
+          <p class="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto font-light">Descubre piezas diseñadas para transformar tu espacio en un refugio de calma y estilo.</p>
+          <a href="category.html?id=asientos-premium" class="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-colors">Explorar Colección</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">Piezas Destacadas</h2>
+              <p class="text-gray-500">Selección curada de nuestros favoritos.</p>
+            </div>
+            <a href="category.html?id=asientos-premium" class="hidden sm:flex items-center text-sm font-medium">Ver todo</a>
+        </div>
+        <div id="featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Dynamic Content -->
+        </div>
+    </section>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
